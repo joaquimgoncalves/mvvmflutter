@@ -1,4 +1,5 @@
 import 'package:arquitetur_mvvm/entidades/aluno.dart';
+import 'package:arquitetur_mvvm/observadores/observador-aluno.dart';
 
 class AlunoDAO{
 
@@ -13,6 +14,8 @@ class AlunoDAO{
         Aluno(2, "Maria Amélia Pereira Rodrigues"),
       ]
     );
+
+    ObservadorAluno.observe((indice) => _repositorio.removeAt(indice));
   }
 
   insira(Aluno aluno){

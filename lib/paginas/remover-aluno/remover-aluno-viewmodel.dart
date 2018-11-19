@@ -1,0 +1,3 @@
+class RemoverAlunoViewModel{
+  int indice;
+}

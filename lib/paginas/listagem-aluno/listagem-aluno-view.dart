@@ -35,7 +35,7 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
   Widget _buildBarPadrao(BuildContext context) {
     return new AppBar(
       centerTitle: true,
-      title: Text("MVVM"),
+      title: Text("Lista"),
       leading: new IconButton(
         icon: Icon(
           Icons.search,

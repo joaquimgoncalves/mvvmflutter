@@ -1,5 +1,6 @@
 import 'package:arquitetur_mvvm/dal/aluno-dao.dart';
 import 'package:arquitetur_mvvm/entidades/rotas.dart';
+import 'package:arquitetur_mvvm/observadores/observador-aluno.dart';
 import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-viewmodel.dart';
 import 'package:flutter/widgets.dart';
 
@@ -18,6 +19,7 @@ class ListagemAlunoController {
     });
 
     listeTodos();
+    ObservadorAluno.observe((indice) => listeTodos());
   }
 
   listeTodos(){
