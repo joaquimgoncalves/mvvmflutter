@@ -1,5 +1,7 @@
+import 'package:arquitetur_mvvm/helpers/toast-helper.dart';
 import 'package:arquitetur_mvvm/observadores/observador-aluno.dart';
 import 'package:arquitetur_mvvm/paginas/remover-aluno/remover-aluno-viewmodel.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RemoverAlunoController{
@@ -15,5 +17,6 @@ class RemoverAlunoController{
 
   remova(){
     ObservadorAluno.notifique(viewModel.indice);
+    ToastHelper.apresenteMensagem("Aluno excluído.");
   }
 }

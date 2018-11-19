@@ -9,11 +9,19 @@ class ListagemAlunoPage extends StatefulWidget {
     var state = _ListagemAlunoState();
     state.controller = ListagemAlunoController(state);
     return state;
-  }
+  }  
 }
 
 class _ListagemAlunoState extends State<ListagemAlunoPage> {
   ListagemAlunoController controller;
+
+  static String floatingKey = "FLOATINGKEY";
+
+  @override
+  initState() {
+    super.initState();
+    controller.listeTodos();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +33,7 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
           : _buildBarPadrao(context),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
+        key: Key(floatingKey),
         onPressed: () => controller.abrirFormulario(),
         tooltip: 'Novo',
         child: Icon(Icons.add),
@@ -41,7 +50,9 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
           Icons.search,
           color: Colors.white,
         ),
-        onPressed: () { controller.pesquisar(); },
+        onPressed: () {
+          controller.pesquisar();
+        },
       ),
     );
   }
@@ -50,17 +61,23 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
     return new AppBar(
       centerTitle: true,
       title: new TextField(
-        autofocus: true,        
+        autofocus: true,
         controller: controller.pesquisaController,
         decoration: new InputDecoration(
-            prefixIcon: new Icon(Icons.search, color: Colors.white,), hintText: 'Pesquisar...'),
+            prefixIcon: new Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            hintText: 'Pesquisar...'),
       ),
       leading: new IconButton(
         icon: Icon(
           Icons.close,
           color: Colors.white,
         ),
-        onPressed: () { controller.cancelarPesquisa(); },
+        onPressed: () {
+          controller.cancelarPesquisa();
+        },
       ),
     );
   }

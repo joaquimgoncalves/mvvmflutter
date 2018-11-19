@@ -18,23 +18,29 @@ class ListagemAlunoController {
       filtre();
     });
 
-    listeTodos();
     ObservadorAluno.observe((indice) => listeTodos());
   }
 
-  listeTodos(){
-    viewModel.alunosLista = AlunoDAO.instancia.liste();    
+  listeTodos() async {
+    viewModel.alunosLista = await AlunoDAO.instancia.liste();
+    if(viewState.mounted)
+      viewState.setState((){
+        
+      });
   }
 
   filtre(){
     if(viewModel.textoPesquisa.isNotEmpty){
-      viewModel.alunosLista = AlunoDAO.instancia.liste().where((aluno) => aluno.nome.toLowerCase().contains(viewModel.textoPesquisa.toLowerCase())).toList();
-      viewState.setState((){});
+      AlunoDAO.instancia.liste().then((itens) {
+        viewModel.alunosLista = itens.where((aluno) => aluno.nome.toLowerCase().contains(viewModel.textoPesquisa.toLowerCase())).toList();
+        viewState.setState((){});
+      });
     }
   }
 
   abrirFormulario() {
-    Navigator.of(context).pushNamed(Rotas.formularioAluno);
+    Navigator.of(context).pushNamed(Rotas.formularioAluno)
+    .then((onValue) => listeTodos());
   }
 
   pesquisar() {

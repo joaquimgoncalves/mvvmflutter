@@ -4,15 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FormularioAlunoPage extends StatefulWidget {
+  
   @override
-  _FormularioAlunoState createState() {
-    var viewState = _FormularioAlunoState();
+  FormularioAlunoState createState() {
+    var viewState = FormularioAlunoState();
     viewState.controller = FormularioAlunoController(viewState);
     return viewState;
   }
 }
 
-class _FormularioAlunoState extends State<FormularioAlunoPage> {
+class FormularioAlunoState extends State<FormularioAlunoPage> {
   FormularioAlunoController controller;
 
   @override

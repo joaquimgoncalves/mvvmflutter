@@ -18,6 +18,7 @@ class FormularioAlunoController {
 
   salve(){
     AlunoDAO.instancia.insira(viewModel.obtenhaAluno());
-    Navigator.of(context).pop();
+    if(context != null)
+      Navigator.of(context).pop();
   }
 }

@@ -1,28 +1,41 @@
+import 'package:arquitetur_mvvm/dal/aplicacao-dao.dart';
 import 'package:arquitetur_mvvm/entidades/aluno.dart';
 import 'package:arquitetur_mvvm/observadores/observador-aluno.dart';
 
 class AlunoDAO{
 
-  List<Aluno> _repositorio = List<Aluno>();
-
   static AlunoDAO instancia = AlunoDAO();
 
-  AlunoDAO(){
-    _repositorio.addAll(
-      [
-        Aluno(1, "João Miguel da Silva Sauro"),
-        Aluno(2, "Maria Amélia Pereira Rodrigues"),
-      ]
-    );
-
-    ObservadorAluno.observe((indice) => _repositorio.removeAt(indice));
+  AlunoDAO(){    
+    ObservadorAluno.observe((indice) => remova(indice));
   }
 
   insira(Aluno aluno){
-    _repositorio.add(aluno);
+
+    AplicacaoDAO.obtenhaBancoDados().then((db) {
+        var map = aluno.getMap();
+        db.insert('Aluno', map);
+    });
   }
 
-  List<Aluno> liste(){
-    return _repositorio;
+  remova(int indice) async {
+    var itens = await liste();
+    if(itens.length >= (indice +  1)){
+      var db = await AplicacaoDAO.obtenhaBancoDados();
+      await db.delete('Aluno', where: 'id = ?', whereArgs: [itens[indice].id]);
+    }
+  }
+
+  Future<List<Aluno>> liste() async {
+    
+    var db = await AplicacaoDAO.obtenhaBancoDados();
+    var map = await db.query('Aluno');
+    var resultado = List<Aluno>();
+
+    for (var i = 0; i < map.length; i++) {
+      resultado.add(Aluno.fromMap(map[i]));
+    }
+
+    return resultado;
   }
 }
