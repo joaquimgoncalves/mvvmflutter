@@ -23,7 +23,7 @@ class _RemoverAlunoState extends State<RemoverAlunoPage> {
         Row(
           children: <Widget>[
             FormularioHelper.crieTextField(
-                "Índice para remover", controller.indiceController),
+                "Id do aluno", controller.idController),
           ],
         ),
         Column(

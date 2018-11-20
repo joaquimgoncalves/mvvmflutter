@@ -5,7 +5,13 @@ import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-view.dart'
 import 'package:arquitetur_mvvm/paginas/remover-aluno/remover-aluno-view.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  FlutterError.onError = (FlutterErrorDetails details) async {
+    print("Erro inesperado na aplicação:" + details.exceptionAsString());
+  };
+  
+  runApp(MyApp());
+} 
 
 class MyApp extends StatelessWidget {
   @override

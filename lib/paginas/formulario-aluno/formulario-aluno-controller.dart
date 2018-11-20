@@ -1,5 +1,6 @@
 import 'package:arquitetur_mvvm/dal/aluno-dao.dart';
 import 'package:arquitetur_mvvm/paginas/formulario-aluno/formulario-aluno-viewmodel.dart';
+import 'package:arquitetur_mvvm/servicos/aluno-firebase.dart';
 import 'package:flutter/widgets.dart';
 
 class FormularioAlunoController {
@@ -17,8 +18,8 @@ class FormularioAlunoController {
   }
 
   salve(){
-    AlunoDAO.instancia.insira(viewModel.obtenhaAluno());
-    if(context != null)
-      Navigator.of(context).pop();
+    //AlunoDAO.instancia.insira(viewModel.obtenhaAluno());
+    AlunoFirebase.instancia.insira(viewModel.obtenhaAluno());
+    Navigator.of(context).pop();
   }
 }

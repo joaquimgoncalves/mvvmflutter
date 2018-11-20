@@ -101,6 +101,7 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
               aluno.nome,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            subtitle: Text('Id: ' + aluno.id.toString()),
           ),
         ),
       ),

@@ -11,7 +11,7 @@ class Aluno {
     return map;
   }
 
-  static Aluno fromMap(Map<String, dynamic> map) {
+  static Aluno fromMap(Map<dynamic, dynamic> map) {
     return Aluno(map['id'], map['nome']);
   }
 }
