@@ -20,7 +20,7 @@ class MensagemFirebase extends FirebaseAbstrato<Mensagem> {
     return obj.toMap();
   }
 
-  void novaMensagem(Function(Mensagem mensagem) callback) {
+  void novaMensagem(void Function(Mensagem mensagem) callback) {
     getDb().then((db) {
       var stream = db.reference().child(getPathName()).onChildAdded;
       stream.listen((onData) {

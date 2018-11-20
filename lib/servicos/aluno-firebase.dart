@@ -9,9 +9,7 @@ class AlunoFirebase extends FirebaseAbstrato<Aluno> {
 
     if (key != null) {
       var db = await getDb();
-
       db.reference().child('alunos').child(key).remove();
-
       return true;
     }
 

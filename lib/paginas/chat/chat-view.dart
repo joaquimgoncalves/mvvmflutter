@@ -122,8 +122,7 @@ class _ChatState extends State<ChatPage> {
               mensagem.nomeOrigem,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(
-              mensagem.mensagem,
+            subtitle: Text(mensagem.toString(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

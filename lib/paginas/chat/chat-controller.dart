@@ -38,7 +38,7 @@ class ChatController {
 
   salveMensagem() {
     var mensagem =
-        Mensagem(viewModel.textoMensagem, viewModel.modeloDispositivo);
+        Mensagem(viewModel.textoMensagem, viewModel.modeloDispositivo, DateTime.now());
     MensagemFirebase.instancia.insira(mensagem);
 
     viewState.setState(() {
