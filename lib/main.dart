@@ -1,5 +1,5 @@
-import 'package:arquitetur_mvvm/componentes/bottom-navigation.dart';
 import 'package:arquitetur_mvvm/entidades/rotas.dart';
+import 'package:arquitetur_mvvm/paginas/chat/chat-view.dart';
 import 'package:arquitetur_mvvm/paginas/formulario-aluno/formulario-aluno-view.dart';
 import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-view.dart';
 import 'package:arquitetur_mvvm/paginas/remover-aluno/remover-aluno-view.dart';
@@ -9,9 +9,9 @@ void main() {
   FlutterError.onError = (FlutterErrorDetails details) async {
     print("Erro inesperado na aplicação:" + details.exceptionAsString());
   };
-  
+
   runApp(MyApp());
-} 
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
           Rotas.listagemAluno: (BuildContext context) =>
               new ListagemAlunoPage(), //6
           Rotas.formularioAluno: (BuildContext context) =>
-              new FormularioAlunoPage() //7
+              new FormularioAlunoPage(),
+          Rotas.chat : (BuildContext context) =>
+              new ChatPage(), //7
         });
   }
 }
@@ -51,7 +53,7 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         body: PageView(
-          children: <Widget>[ListagemAlunoPage(), RemoverAlunoPage()],
+          children: <Widget>[ListagemAlunoPage(), RemoverAlunoPage(), ChatPage()],
           controller: _pageController,
           onPageChanged: (newPage) {
             setState(() {
@@ -67,12 +69,13 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
           items: <BottomNavigationBarItem>[
             new BottomNavigationBarItem(
                 icon: const Icon(Icons.list),
-                title: Text('Listagem'),
-                backgroundColor: Colors.blue),
+                title: Text('Listagem')),                
             new BottomNavigationBarItem(
                 icon: const Icon(Icons.edit),
-                title: Text('Excluir'),
-                backgroundColor: Colors.blue[800])
+                title: Text('Excluir')),                
+            new BottomNavigationBarItem(
+                icon: const Icon(Icons.message),
+                title: Text('Chat'))
           ],
         ));
   }

@@ -1,7 +1,6 @@
 import 'package:arquitetur_mvvm/dal/aluno-dao.dart';
 import 'package:arquitetur_mvvm/entidades/rotas.dart';
 import 'package:arquitetur_mvvm/observadores/observador-aluno.dart';
-import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
 import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-viewmodel.dart';
 import 'package:arquitetur_mvvm/servicos/aluno-firebase.dart';
 import 'package:flutter/widgets.dart';
