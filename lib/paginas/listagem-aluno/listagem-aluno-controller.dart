@@ -11,6 +11,8 @@ class ListagemAlunoController extends ControllerAbstrato {
   ListagemAlunoViewModel viewModel = ListagemAlunoViewModel();    
   TextEditingController pesquisaController = TextEditingController();
 
+  String ultimaPesquisa;
+
   ListagemAlunoController(viewState) : super(viewState) {    
    
    pesquisaController.addListener(() {
@@ -23,14 +25,17 @@ class ListagemAlunoController extends ControllerAbstrato {
 
   listeTodos() async {
     viewModel.alunosLista = await AlunoFirebase.instancia.liste();    
-    setStateAll();
+    viewModel.carregouLista = true;
+    setStateAll();    
   }
 
   filtre(){
-    if(viewModel.textoPesquisa.isNotEmpty){
-      AlunoDAO.instancia.liste().then((itens) {
-        viewModel.alunosLista = itens.where((aluno) => aluno.nome.toLowerCase().contains(viewModel.textoPesquisa.toLowerCase())).toList();
-        setStateAll();
+    if(viewModel.textoPesquisa.isNotEmpty && ultimaPesquisa != viewModel.textoPesquisa){
+      ultimaPesquisa = viewModel.textoPesquisa;
+      AlunoFirebase.instancia.liste().then((itens) {
+        setState(() {
+          viewModel.alunosLista = itens.where((aluno) => aluno.nome.toLowerCase().contains(viewModel.textoPesquisa.toLowerCase())).toList();
+        });
       });
     }
   }

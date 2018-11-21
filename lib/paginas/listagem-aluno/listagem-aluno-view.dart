@@ -1,4 +1,5 @@
 import 'package:arquitetur_mvvm/entidades/aluno.dart';
+import 'package:arquitetur_mvvm/helpers/progress-helper.dart';
 import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
 import 'package:arquitetur_mvvm/paginas/arquitetura/pagina-abstrata.dart';
 import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-controller.dart';
@@ -26,14 +27,15 @@ class _ListagemAlunoState
     super.initState();
     controller.listeTodos();
   }
-
+  
   @override
   Widget getWidgets() {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: controller.viewModel.pesquisando
           ? _buildBarPesquisar(context)
           : _buildBarPadrao(context),
-      body: _buildList(),
+      body: controller.viewModel.carregouLista ? _buildList() : ProgressHelper.obtenhaProgress(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.abrirFormulario(),
         tooltip: 'Novo',

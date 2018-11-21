@@ -1,8 +1,12 @@
+import 'package:arquitetur_mvvm/helpers/snackbar-helper.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/pagina-abstrata.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ControllerAbstrato {
-  State viewState;
+  PageStateAbstract viewState;
   BuildContext context;
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackbarController;
 
   ControllerAbstrato(this.viewState);
 
@@ -21,4 +25,20 @@ class ControllerAbstrato {
   pushPageWithCallback(String rota, void Function(dynamic value) callback) {
     Navigator.of(context).pushNamed(rota).then(callback);
   }
+
+  popPage(){
+    Navigator.of(context).pop();
+  }
+
+  apresenteLoading() {    
+    snackbarController = Scaffold.of(context).showSnackBar(SnackbarHelper.crieSnackbarLoading(context)); 
+  } 
+
+  removaLoading(){
+    if(snackbarController != null){
+      snackbarController.close();
+      snackbarController = null;
+    }
+  }
+
 }

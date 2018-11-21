@@ -4,4 +4,5 @@ class ListagemAlunoViewModel{
   List<Aluno> alunosLista = List<Aluno>();
   String textoPesquisa;
   bool pesquisando = false;
+  bool carregouLista = false;
 }

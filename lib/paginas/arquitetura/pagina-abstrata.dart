@@ -1,4 +1,5 @@
 import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class PaginaAbstrata extends StatefulWidget {
@@ -13,8 +14,10 @@ abstract class PaginaAbstrata extends StatefulWidget {
   ControllerAbstrato getController(PageStateAbstract state);
 }
 
-abstract class PageStateAbstract<T extends PaginaAbstrata, C extends ControllerAbstrato> extends State<T> {
+abstract class PageStateAbstract<T extends PaginaAbstrata,
+    C extends ControllerAbstrato> extends State<T> {
   C controller;
+    
   Widget getWidgets();
 
   @override
@@ -22,4 +25,5 @@ abstract class PageStateAbstract<T extends PaginaAbstrata, C extends ControllerA
     controller.context = context;
     return getWidgets();
   }
+
 }
