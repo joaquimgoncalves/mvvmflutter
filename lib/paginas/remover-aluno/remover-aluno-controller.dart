@@ -27,4 +27,11 @@ class RemoverAlunoController extends ControllerAbstrato {
       }
     });
   }
+
+  testarProgresso() {
+    apresenteLoading();
+    Future.delayed(Duration(seconds: 4), () {
+      removaLoading();
+    }); 
+  }
 }

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class SnackbarHelper {
   static SnackBar crieSnackbarLoading(BuildContext context) {
-    return SnackBar(
+    return SnackBar(        
         content: new Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         new CircularProgressIndicator(),
         new Padding( padding: EdgeInsets.symmetric(horizontal: 8),),
-        new Text("Carregando"),
+        new Text("Carregando..."),
       ],
     ));
   }

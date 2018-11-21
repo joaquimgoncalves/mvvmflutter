@@ -39,7 +39,13 @@ class _RemoverAlunoState extends PageStateAbstract<RemoverAlunoPage, RemoverAlun
             MaterialButton(
               onPressed: () => controller.remova(),
               child: Text("Remover"),
-            )
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 10),),
+            Divider(color: Colors.grey[300],),            
+            MaterialButton(
+              onPressed: () => controller.testarProgresso(),
+              child: Text("Testar progress"),
+            ),
           ],
         )
       ]),
