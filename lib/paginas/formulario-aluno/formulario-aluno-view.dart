@@ -1,24 +1,27 @@
 import 'package:arquitetur_mvvm/helpers/formulario-helper.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/pagina-abstrata.dart';
 import 'package:arquitetur_mvvm/paginas/formulario-aluno/formulario-aluno-controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FormularioAlunoPage extends StatefulWidget {
-  
+class FormularioAlunoPage extends PaginaAbstrata {
+    
   @override
-  FormularioAlunoState createState() {
-    var viewState = FormularioAlunoState();
-    viewState.controller = FormularioAlunoController(viewState);
-    return viewState;
+  ControllerAbstrato getController(PageStateAbstract state) {    
+    return FormularioAlunoController(state);
+  }
+
+  @override
+  PageStateAbstract getState() {    
+    return FormularioAlunoState();
   }
 }
 
-class FormularioAlunoState extends State<FormularioAlunoPage> {
-  FormularioAlunoController controller;
-
+class FormularioAlunoState extends PageStateAbstract<FormularioAlunoPage, FormularioAlunoController> {
+  
   @override
-  Widget build(BuildContext context) {
-    controller.context = context;
+  Widget getWidgets() {
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.all(30),

@@ -1,23 +1,27 @@
 import 'package:arquitetur_mvvm/helpers/formulario-helper.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/pagina-abstrata.dart';
 import 'package:arquitetur_mvvm/paginas/remover-aluno/remover-aluno-controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class RemoverAlunoPage extends StatefulWidget {
+class RemoverAlunoPage extends PaginaAbstrata {
+  
   @override
-  _RemoverAlunoState createState() {
-    var viewState = _RemoverAlunoState();
-    viewState.controller = RemoverAlunoController(viewState);
-    return viewState;
+  ControllerAbstrato getController(PageStateAbstract<PaginaAbstrata, ControllerAbstrato> state) {
+    return RemoverAlunoController(state);
+  }
+
+  @override
+  PageStateAbstract<PaginaAbstrata, ControllerAbstrato> getState() {
+    return _RemoverAlunoState();
   }
 }
 
-class _RemoverAlunoState extends State<RemoverAlunoPage> {
-  RemoverAlunoController controller;
-
+class _RemoverAlunoState extends PageStateAbstract<RemoverAlunoPage, RemoverAlunoController> {
+ 
   @override
-  Widget build(BuildContext context) {
-    controller.context = context;
+  Widget getWidgets() {
     return Scaffold(      
       body: ListView(padding: EdgeInsets.all(30), children: <Widget>[
         Row(

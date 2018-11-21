@@ -1,21 +1,25 @@
 import 'package:arquitetur_mvvm/entidades/aluno.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/controller-abstrato.dart';
+import 'package:arquitetur_mvvm/paginas/arquitetura/pagina-abstrata.dart';
 import 'package:arquitetur_mvvm/paginas/listagem-aluno/listagem-aluno-controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ListagemAlunoPage extends StatefulWidget {
+class ListagemAlunoPage extends PaginaAbstrata {
   @override
-  _ListagemAlunoState createState() {
-    var state = _ListagemAlunoState();
-    state.controller = ListagemAlunoController(state);
-    return state;
-  }  
+  ControllerAbstrato getController(PageStateAbstract state) {
+    return ListagemAlunoController(state);
+  }
+
+  @override
+  PageStateAbstract getState() {
+    return _ListagemAlunoState();
+  }
 }
 
-class _ListagemAlunoState extends State<ListagemAlunoPage> {
+class _ListagemAlunoState
+    extends PageStateAbstract<ListagemAlunoPage, ListagemAlunoController> {
   ListagemAlunoController controller;
-
-  static String floatingKey = "FLOATINGKEY";
 
   @override
   initState() {
@@ -24,16 +28,13 @@ class _ListagemAlunoState extends State<ListagemAlunoPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    controller.context = context;
-
+  Widget getWidgets() {
     return Scaffold(
       appBar: controller.viewModel.pesquisando
           ? _buildBarPesquisar(context)
           : _buildBarPadrao(context),
       body: _buildList(),
       floatingActionButton: FloatingActionButton(
-        key: Key(floatingKey),
         onPressed: () => controller.abrirFormulario(),
         tooltip: 'Novo',
         child: Icon(Icons.add),
