@@ -17,7 +17,7 @@ abstract class PaginaAbstrata extends StatefulWidget {
 abstract class PageStateAbstract<T extends PaginaAbstrata,
     C extends ControllerAbstrato> extends State<T> {
   C controller;
-    
+
   Widget getWidgets();
 
   @override
@@ -26,4 +26,59 @@ abstract class PageStateAbstract<T extends PaginaAbstrata,
     return getWidgets();
   }
 
+  void apresenteDialogo(BuildContext context, String descricao,
+      {String titulo = "Atenção", void Function() callback}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text(titulo),
+            content: new Text(descricao),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  if (callback != null) callback();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void confirme(
+      BuildContext context, String descricao, void Function() callback,
+      {String titulo = "Pergunta"}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text(titulo),
+            content: new Text(descricao),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              new FlatButton(
+                child: new Text(
+                  "Cancelar",
+                  style: TextStyle(color: Colors.red[300]),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text("Sim"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  callback();
+                },
+              ),
+            ],
+          );
+        });
+  }
 }

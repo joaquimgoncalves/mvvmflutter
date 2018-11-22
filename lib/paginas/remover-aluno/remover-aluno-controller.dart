@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RemoverAlunoController extends ControllerAbstrato {
-  var viewModel = RemoverAlunoViewModel();  
+  var viewModel = RemoverAlunoViewModel();
 
   TextEditingController idController = TextEditingController();
 
@@ -17,14 +17,17 @@ class RemoverAlunoController extends ControllerAbstrato {
   }
 
   remova() {
-    AlunoFirebase.instancia.elimine(viewModel.id).then((removeu) {
-      if (removeu) {
-        ObservadorAluno.notifique(viewModel.id);
-        ToastHelper.apresenteMensagem("Aluno excluído.");
-      }
-      else{
-        ToastHelper.apresenteMensagem("Nenhum aluno com este ID.");
-      }
+    confirme("Tem certeza que deseja excluir o aluno?", () {
+      
+      AlunoFirebase.instancia.elimine(viewModel.id).then((removeu) {
+        if (removeu) {
+          ObservadorAluno.notifique(viewModel.id);
+          ToastHelper.apresenteMensagem("Aluno excluído.");
+        } else {
+          ToastHelper.apresenteMensagem("Nenhum aluno com este ID.");
+        }
+      });
+      
     });
   }
 
@@ -32,6 +35,6 @@ class RemoverAlunoController extends ControllerAbstrato {
     apresenteLoading();
     Future.delayed(Duration(seconds: 4), () {
       removaLoading();
-    }); 
+    });
   }
 }

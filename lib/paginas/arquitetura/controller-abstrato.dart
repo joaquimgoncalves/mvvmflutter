@@ -41,4 +41,11 @@ class ControllerAbstrato {
     }
   }
 
+  confirme(String pergunta, void Function() callback){
+    viewState.confirme(context, pergunta, callback);
+  }
+
+  apresenteDialogo(String texto, {void Function() callback}){
+    viewState.confirme(context, texto, callback);
+  }
 }
